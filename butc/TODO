@@ -1,0 +1,16 @@
+
+Todo:
+  ☐ Finish calculateArcherScore in utilities.js
+  ☐ TargetListForm: Need to implement switching targets, and provide notification of which university it is switching with
+  ☐ TargetListForm: Switching Archers within university
+  ☐ Add system tests for entire system
+  ☐ Move system to database
+  ☐ H2H Section
+  ☐ Results production
+  ☐ User login support - admin, scorers
+    - set all currently editable components to be admin/scorer only
+  ☐ Scorer seeding and H2H mobile entry option
+  ☐ Scorer 1 end data entry seeding round, (One row per archer)
+    - need to store current end
+  ☐ Add validation for all forms
+

@@ -1,0 +1,52 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40px;
+}
+
+.App-header {
+  background-color: rgb(225, 239, 243);
+  height: 175px;
+  padding: 20px;
+  color: black;
+}
+
+.University {
+  width: 30%;
+  margin: 16px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 16px;
+  text-align: center;
+}
+
+.UniversityForm {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  margin: 16px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 16px;
+  text-align: center;
+}
+
+.Scores {
+  /* width: 90%; */
+  margin: 16px auto;
+  border: 1px solid #eee;
+  box-shadow: 0 2px 3px #ccc;
+  padding: 16px;
+  text-align: center;
+}
+
+.TargetList {
+    width: 90%;
+    margin: 16px auto;
+    /* border: 1px solid #eee; */
+    /* box-shadow: 0 2px 3px #ccc; */
+    padding: 16px;
+    text-align: center;
+}
