@@ -9,7 +9,6 @@ import IndividualScores from '../seedingScoring/scoringViews/individualScores';
 import SeedingDashboard from '../seedingScoring/seedingDashboard';
 import H2HTargets from '../H2H/h2hTargets';
 import H2HDashboard from '../H2H/h2hDashboard';
-import Login from '../authentication/login';
 
 class NavBar extends React.Component {
     state = {
@@ -24,7 +23,6 @@ class NavBar extends React.Component {
         const seedingDashboard = () => { return <SeedingDashboard />; };
         const h2hTargets = () => { return <H2HTargets />; };
         const h2hDashboard = () => { return <H2HDashboard />; };
-        const login = () => {return <Login />;};
 
         return (
             <div>
@@ -32,13 +30,6 @@ class NavBar extends React.Component {
                     <Menu.Item>
                         <img src={logo} className="App-logo" alt="logo" />
                     </Menu.Item>
-                    <Menu.Item
-                        name='login'
-                        active={activeItem === 'Login'}
-                        onClick={this.handleItemClick}
-                        as={NavLink}
-                        to='/login'
-                    />
                     <Menu.Item
                         name='registration'
                         active={activeItem === 'Registration'}
@@ -105,7 +96,6 @@ class NavBar extends React.Component {
                     </Dropdown>
                 </Menu>
                 <Switch>
-                    <Route path='/login/' component={login} />
                     <Route path='/registration/' component={universityDashboard} />
                     <Route path='/targets/' component={targetDashboard} />
                     <Route path='/seeding_uni/' component={universityScores} />

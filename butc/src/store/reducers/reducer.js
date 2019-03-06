@@ -2,8 +2,6 @@ import * as actionTypes from '../actions/actionTypes';
 import initialState from '../initial_data/iniitalState';
 import { calculateScores, rank_archers } from './reducer_logic/seedingScoring';
 import { calculateH2HScores } from './reducer_logic/h2h_logic';
-import { saveUniversities, getData, failedDataFetch } from '../actions/actions';
-import axios from '../../axios';
 
 function addUniversity(state, action) {
   var new_university_id = state.last_university_id + 1;
@@ -93,14 +91,6 @@ function returnState(state, action) {
     error: false
   };
 }
-
-function dataFetchFailed(state, action) {
-  return {
-    ...state,
-    error: true
-  };
-}
-
 
 // ----------------------REDUCER -----------------------------
 

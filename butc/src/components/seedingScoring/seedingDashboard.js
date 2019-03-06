@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Select } from 'semantic-ui-react';
 import EditableArcherScoreList from './archerScoring/EditableArcherScoreList';
 import { update_score } from '../../store/actions/actions';
-import {postUniversityData, initialiseUniversities} from '../../store/database_logic';
+import {initialiseUniversities} from '../../store/database_logic';
 
 class SeedingDashboard extends React.Component {
     state = {
@@ -13,43 +13,43 @@ class SeedingDashboard extends React.Component {
 
     componentDidMount() {
         this.props.onInitialiseUniversities();
-        this.setState({universities_displayed: this.props.universities})
+        this.setState({universities_displayed: this.props.universities});
     }
 
     handleTargetNumberChange = (event, value) => {
-        var current_target = this.state.target
-        current_target = value.value
+        var current_target = this.state.target;
+        current_target = value.value;
         this.setState({ current_target });
 
         if (current_target === 'All') {
-            var universities_displayed = this.props.universities
+            var universities_displayed = this.props.universities;
         } else {
-            var universities_displayed = this.props.universities.filter(university => university.target.number === current_target)
+            var universities_displayed = this.props.universities.filter(university => university.target.number === current_target);
         }
-        this.setState({ universities_displayed })
+        this.setState({ universities_displayed });
     }
 
     handleEditFormSubmit = (attrs) => {
-        this.props.onScoreEdited(attrs)
-        this.props.onSaveUniversities(this.props)
+        this.props.onScoreEdited(attrs);
+        this.props.onSaveUniversities(this.props);
     };
 
     render() {
-        console.log('rendering scoring dashboard')
-        console.log(this.props.universities)
+        console.log('rendering scoring dashboard');
+        console.log(this.props.universities);
 
         // Assign targets to be shown <- initially show all targets then select which one
-        const target_keys = []
-        var found_targets = []
+        const target_keys = [];
+        var found_targets = [];
 
-        target_keys.push({ key: 'All', text: 'All Targets ', value: 'All' })
+        target_keys.push({ key: 'All', text: 'All Targets ', value: 'All' });
         this.props.targets.map((target) => {
-            var key = { key: target.number, text: 'Target ' + target.number, value: target.number }
+            var key = { key: target.number, text: 'Target ' + target.number, value: target.number };
             if (!found_targets.includes(target.number)) {
-                found_targets.push(target.number)
-                target_keys.push(key)
+                found_targets.push(target.number);
+                target_keys.push(key);
             }
-        })
+        });
 
         // create list of components to display
         var editableArcherScores = this.state.universities_displayed.map((university, index) => {
@@ -57,12 +57,12 @@ class SeedingDashboard extends React.Component {
                 university={university}
                 key={index}
                 onFormSubmit={this.handleEditFormSubmit}
-            />
+                   />;
         });
 
 
-        console.log(editableArcherScores)
-        console.log(editableArcherScores.length)
+        console.log(editableArcherScores);
+        console.log(editableArcherScores.length);
 
         return (
             <div className='TargetList'>
@@ -91,7 +91,7 @@ class SeedingDashboard extends React.Component {
 
                 </div>
             </div>
-        )
+        );
     }
 }
 
@@ -99,15 +99,14 @@ const mapStateToProps = state => {
     return {
         universities: state.uni.universities,
         targets: state.uni.targets
-    }
-}
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
         onScoreEdited: (uni) => dispatch(update_score(uni)),
-        onInitialiseUniversities: () => dispatch(initialiseUniversities()),
-        onSaveUniversities: (universities) => dispatch(postUniversityData(universities))
-    }
-}
+        onInitialiseUniversities: () => dispatch(initialiseUniversities())
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SeedingDashboard);

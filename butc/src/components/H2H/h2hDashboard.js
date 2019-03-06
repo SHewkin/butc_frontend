@@ -3,7 +3,7 @@ import { Button, Grid } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import H2HEditableScore from './h2hEditableScore';
 import { update_h2h_round } from '../../store/actions/actions';
-import { postUniversityData, initialiseUniversities } from '../../store/database_logic';
+import { initialiseUniversities } from '../../store/database_logic';
 
 class H2HDashboard extends React.Component {
 
@@ -14,61 +14,61 @@ class H2HDashboard extends React.Component {
 
     componentDidMount() {
         this.props.onInitialiseUniversities();
-        this.setState({universities_displayed: this.props.universities})
+        this.setState({universities_displayed: this.props.universities});
     }
 
     handleEditFormSubmit = (attrs) => {
-        this.props.onScoreEdited(attrs)
-        this.props.onSaveUniversities(this.state)
+        this.props.onScoreEdited(attrs);
+        this.props.onSaveUniversities(this.state);
     };
 
     handleRoundChange = (round) => {
-        console.log('Changing displayed round to ' + round)
-        console.log(this.props)
+        console.log('Changing displayed round to ' + round);
+        console.log(this.props);
         this.setState({
             current_round: round,
             scoringUniversities: this.subsetUniversities(round)
-        })
-        console.log(this.state)
+        });
+        console.log(this.state);
     }
 
     subsetUniversities(round) {
-        const universities = []
+        const universities = [];
         if (round === 'R1A') {
             this.props.universities.map((university) => {
                 if (university.h2hScoring.R1.target.round === 'A') {
-                    universities.push(university)
+                    universities.push(university);
                 }
-            })
+            });
         }
         if (round === 'R1B') {
             this.props.universities.map((university) => {
                 if (university.h2hScoring.R1.target.round === 'B') {
-                    universities.push(university)
+                    universities.push(university);
                 }
-            })
+            });
         }
         if (!(round === 'R1A' | round === 'R1B')) {
-            console.log('round not R1: ' + round)
+            console.log('round not R1: ' + round);
             this.props.universities.map((university) => {
                 if (!university.h2hScoring[round] === undefined) {
-                    universities.push(university)
+                    universities.push(university);
                 }
-            })
+            });
         }
-        return universities
+        return universities;
     }
 
     render() {
         var h2hScoreList = this.state.scoringUniversities.map((university, index) => {
-            console.log('rending editable score')
-            console.log(university)
+            console.log('rending editable score');
+            console.log(university);
             return <H2HEditableScore
                 university={university}
                 key={index}
                 round={this.state.current_round}
                 editFormSubmit={this.handleEditFormSubmit}
-            />
+                   />;
         });
 
         return (
@@ -89,28 +89,27 @@ class H2HDashboard extends React.Component {
                     </div>
                     <div>
 
-                        <Grid columns={3} divided={true}>
+                        <Grid columns={3} divided>
                             {h2hScoreList}
                         </Grid>
                     </div>
                 </div>
             </div>
-        )
+        );
     }
 }
 
 const mapStateToProps = state => {
     return {
         universities: state.uni.universities
-    }
-}
+    };
+};
 
 const mapDispatchToProps = dispatch => {
     return {
         onScoreEdited: (uni) => dispatch(update_h2h_round(uni)),
-        onInitialiseUniversities: () => dispatch(initialiseUniversities()),
-        onSaveUniversities: (universities) => dispatch(postUniversityData(universities))
-    }
-}
+        onInitialiseUniversities: () => dispatch(initialiseUniversities())
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(H2HDashboard);
