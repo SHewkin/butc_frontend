@@ -82,12 +82,32 @@ function updateH2HRound(state, action) {
 
 // -------------------- DB LOGIC ---------------------------
 
-function returnState(state, action) {
+function returnUniversitiesState(state, action) {
   console.log('returning state');
   console.log(action);
   return {
     ...state,
     universities: action.data,
+    error: false
+  };
+}
+
+function returnUniversityScoreList(state, action) {
+  console.log('returning state');
+  console.log(action);
+  return {
+    ...state,
+    universityScoreList: action.data,
+    error: false
+  };
+}
+
+function returnIndividualScoreList(state, action) {
+  console.log('returning state');
+  console.log(action);
+  return {
+    ...state,
+    individualScoreList: action.data,
     error: false
   };
 }
@@ -109,10 +129,16 @@ const reducer = (state = initialState, action) => {
       return updateH2HRound(state, action);
 
     case actionTypes.GET_UNIVERSITIES:
-      return returnState(state, action);
+      return returnUniversitiesState(state, action);
 
     case actionTypes.SAVE_UNIVERSITIES:
-      return returnState(state, action);
+      return returnUniversitiesState(state, action);
+
+    case actionTypes.GET_UNIVERSITY_SCORE_LIST:
+      return returnUniversityScoreList(state, action);
+
+    case actionTypes.GET_INDIVIDUAL_SCORE_LIST:
+      return returnIndividualScoreList(state, action);
 
     default:
       return state;

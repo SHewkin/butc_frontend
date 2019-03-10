@@ -1,10 +1,12 @@
-import {universities} from './initial_universities_anonymous'
+import {universities} from './initial_universities_anonymous';
 
 const initialState = {
     activeItem: 'home',
     last_university_id: 2,
     num_targets: 16,
     universities: universities,
+    universityScoreList: null,
+    individualScoreList: null,
     targets: [
         { number: 1, position: 'top' },
         { number: 1, position: 'bottom' },
@@ -38,7 +40,7 @@ const initialState = {
         { number: 15, position: 'bottom' },
         { number: 16, position: 'top' },
         { number: 16, position: 'bottom' }
-    ],
-}
+    ]
+};
 
 export default initialState;

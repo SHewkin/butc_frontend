@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import {initialiseUniversities} from '../../store/database_logic';
 
-class H2HTarget extends React.Component {
+class H2HScoreView extends React.Component {
     state = {
         current_round: 'R1A',
         round_description: 'Round 1 A',
@@ -25,7 +25,6 @@ class H2HTarget extends React.Component {
     }
 
     handleRoundChange = (round) => {
-        console.log('Changing displayed round to ' + round);
         this.setState({
             current_round: round,
             round_description: this.state.round_mapping[round]
@@ -37,7 +36,7 @@ class H2HTarget extends React.Component {
         if (this.props.universities === null){
             return(
                 <div>
-                    <p>Waiting for target lists</p>
+                    <p>Waiting for scores</p>
                 </div>
             );
             } else {
@@ -50,7 +49,9 @@ class H2HTarget extends React.Component {
                                 universities.push(
                                     {
                                         target: university.h2hScoring.R1.target.number,
-                                        name: university.name
+                                        name: university.name,
+                                        ends: university.h2hScoring.R1.ends,
+                                        shootOff: university.h2hScoring.R1.shootOff
                                     });
                             } catch (e) {
                                 console.log('university ' + university.name + ' not found in round ' + this.state.current_round);
@@ -64,7 +65,9 @@ class H2HTarget extends React.Component {
                                 universities.push(
                                     {
                                         target: university.h2hScoring.R1.target.number,
-                                        name: university.name
+                                        name: university.name,
+                                        ends: university.h2hScoring.R1.ends,
+                                        shootOff: university.h2hScoring.R1.shootOff
                                     });
                             } catch (e) {
                                 console.log('university ' + university.name + ' not found in round ' + this.state.current_round);
@@ -77,7 +80,9 @@ class H2HTarget extends React.Component {
                             universities.push(
                                 {
                                     target: university.h2hScoring[this.state.current_round].target,
-                                    name: university.name
+                                    name: university.name,
+                                    ends: university.h2hScoring[this.state.current_round].ends,
+                                    shootOff: university.h2hScoring[this.state.current_round].shootOff
                                 });
                         }
     
@@ -89,13 +94,24 @@ class H2HTarget extends React.Component {
     
             universities = _.sortBy(universities, ['target']);
     
-            const universityTargets = universities.map((university) => 
-                <tr>
-                    <td data-label='Target'>{university.target}</td>
-                    <td data-label='Name'>{university.name}</td>
-                </tr>
+            const universityTargets = universities.map((university) =>                 
+                <Table.Row>
+                    <Table.Cell data-label='Target'>{university.target}</Table.Cell>
+                    <Table.Cell data-label='Name'>{university.name}</Table.Cell>
+                    <Table.Cell data-label='End1'>{university.ends[0]}</Table.Cell>
+                    <Table.Cell data-label='End2'>{university.ends[1]}</Table.Cell>
+                    <Table.Cell data-label='End3'>{university.ends[2]}</Table.Cell>
+                    <Table.Cell data-label='End4'>{university.ends[3]}</Table.Cell>
+                    <Table.Cell data-label='ShootOff1'>{university.shootOff[0]}</Table.Cell>
+                    <Table.Cell data-label='ShootOff2'>{university.shootOff[1]}</Table.Cell>
+                    <Table.Cell data-label='ShootOff3'>{university.shootOff[2]}</Table.Cell>
+                    <Table.Cell data-label='ShootOff4'>{university.shootOff[3]}</Table.Cell>
+                    <Table.Cell data-label='ShootOff5'>{university.shootOff[4]}</Table.Cell>
+
+                </Table.Row>
             );
     
+            console.log(universities);
             return (
                 <div className='TargetList'>
                     <div>
@@ -107,15 +123,17 @@ class H2HTarget extends React.Component {
                         <Button className='ui primary basic button' onClick={() => this.handleRoundChange('MB')}>Bronze Medal Match</Button>
                         <Button className='ui primary basic button' onClick={() => this.handleRoundChange('MG')}>Gold Medal Match</Button>
                     </div>
-                    <h1 className='ui center aligned'>Target List for {this.state.round_description}</h1>
+                    <h1 className='ui center aligned'>Head to Head Scores for {this.state.round_description}</h1>
                     <Table className='ui celled table'>
-                        <thead>
-                            <th>Target</th>
-                            <th>University</th>
-                        </thead>
-                        <tbody>
+                        <Table.Header>
+                            <Table.HeaderCell>Target</Table.HeaderCell>
+                            <Table.HeaderCell>University</Table.HeaderCell>
+                            <Table.HeaderCell colSpan='4'>Ends</Table.HeaderCell>
+                            <Table.HeaderCell colSpan='4'>shootOff</Table.HeaderCell>
+                        </Table.Header>
+                        <Table.Body>
                             {universityTargets}
-                        </tbody>
+                        </Table.Body>
                     </Table>
                 </div >
             );
@@ -124,7 +142,6 @@ class H2HTarget extends React.Component {
         
     }
 }
-
 
 const mapStateToProps = state => {
     return {
@@ -137,4 +154,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(H2HTarget);
+export default connect(mapStateToProps, mapDispatchToProps)(H2HScoreView);

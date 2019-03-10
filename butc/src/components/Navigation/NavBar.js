@@ -6,9 +6,9 @@ import UniversityDashboard from '../universities/UniversityDashboard';
 import TargetListDashboard from '../TargetLists/TargetListDashboard';
 import UniversityScores from '../seedingScoring/scoringViews/universityScores';
 import IndividualScores from '../seedingScoring/scoringViews/individualScores';
-import SeedingDashboard from '../seedingScoring/seedingDashboard';
 import H2HTargets from '../H2H/h2hTargets';
-import H2HDashboard from '../H2H/h2hDashboard';
+import H2hScoreView from '../H2H/h2hScoreView';
+import H2HScore from '../H2H/h2hScore';
 
 class NavBar extends React.Component {
     state = {
@@ -20,9 +20,8 @@ class NavBar extends React.Component {
         const targetDashboard = () => { return <TargetListDashboard />; };
         const universityScores = () => { return <UniversityScores />; };
         const individualScores = () => { return <IndividualScores />; };
-        const seedingDashboard = () => { return <SeedingDashboard />; };
         const h2hTargets = () => { return <H2HTargets />; };
-        const h2hDashboard = () => { return <H2HDashboard />; };
+        const h2hScoreView = () => { return <H2hScoreView />; };
 
         return (
             <div>
@@ -44,16 +43,8 @@ class NavBar extends React.Component {
                         as={NavLink}
                         to='/targets'
                     />
-                    <Dropdown item simple text='Scoring Seeding Round'>
+                    <Dropdown item simple text='Seeding Round'>
                         <Dropdown.Menu>
-                            <Dropdown.Item
-                                text='Enter Scores'
-                                name='seeding_scoring'
-                                active={activeItem === 'seedingScoring'}
-                                onClick={this.handleItemClick}
-                                as={NavLink}
-                                to='/seeding_scoring'
-                            />
                             <Dropdown.Item
                                 text='University Team Scores'
                                 name='universityScores'
@@ -100,9 +91,8 @@ class NavBar extends React.Component {
                     <Route path='/targets/' component={targetDashboard} />
                     <Route path='/seeding_uni/' component={universityScores} />
                     <Route path='/seeding_individual/' component={individualScores} />
-                    <Route path='/seeding_scoring/' component={seedingDashboard} />
                     <Route path='/h2h_target_list/' component={h2hTargets} />
-                    <Route path='/h2h_scoring/' component={h2hDashboard} />
+                    <Route path='/h2h_scoring/' component={h2hScoreView} />
                 </Switch>
             </div>
         );

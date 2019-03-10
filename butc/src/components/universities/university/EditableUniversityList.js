@@ -34,7 +34,7 @@ class EditableUniversityList extends React.Component {
     return (
       <div>
         <h1 className='ui center aligned'>Registered Teams</h1>
-        <Table className='ui celled table'>
+        <Table className='ui celled centered table'>
           <Table.Header>
               <Table.HeaderCell>University</Table.HeaderCell>
               <Table.HeaderCell>First Name</Table.HeaderCell>

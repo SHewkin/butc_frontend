@@ -23,7 +23,6 @@ class H2HDashboard extends React.Component {
     };
 
     handleRoundChange = (round) => {
-        console.log('Changing displayed round to ' + round);
         console.log(this.props);
         this.setState({
             current_round: round,
@@ -61,8 +60,6 @@ class H2HDashboard extends React.Component {
 
     render() {
         var h2hScoreList = this.state.scoringUniversities.map((university, index) => {
-            console.log('rending editable score');
-            console.log(university);
             return <H2HEditableScore
                 university={university}
                 key={index}
@@ -70,6 +67,7 @@ class H2HDashboard extends React.Component {
                 editFormSubmit={this.handleEditFormSubmit}
                    />;
         });
+
 
         return (
             <div className='TargetList'>

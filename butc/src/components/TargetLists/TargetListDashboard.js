@@ -1,8 +1,6 @@
 import React from 'react';
 import EditableTargetList from './EditableTargetList';
-import { Button } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { update_university } from '../../store/actions/actions';
 import { initialiseUniversities } from '../../store/database_logic';
 
 var _ = require('lodash');
@@ -75,7 +73,6 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUniEdited: (uni) => dispatch(update_university(uni)),
         onInitialiseUniversities: () => dispatch(initialiseUniversities())
     };
 };
