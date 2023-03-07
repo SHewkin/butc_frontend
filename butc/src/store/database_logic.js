@@ -2,7 +2,7 @@ import {getData, getUniversityScoreList, getIndividualScoreList} from './actions
 import _ from 'lodash';
 
 //butc copy spreadsheet
-const API = 'https://sheets.googleapis.com/v4/spreadsheets/1uFI-7nYfe8OobXjuuHCYFC5wf9-cQsjDUwrMLvQyi-w/values:batchGet?majorDimension=COLUMNS&ranges=Universities&key=AIzaSyDGfidY0fI_gQs6o2HhrgXjC6RkBi8aj9w';
+const API = 'INSERT URL HERE';
 
 
 export const initialiseUniversities = () => {
